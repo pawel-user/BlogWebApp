@@ -15,6 +15,10 @@ app.get("/bio", (req, res) => {
     res.render("bio.ejs");
 });
 
+app.get("/portfolio", (req, res) => {
+    res.render("portfolio.ejs");
+});
+
 app.get("/contact", (req, res) => {
     res.render("contact.ejs");
 });
