@@ -23,7 +23,7 @@ app.get("/contact", (req, res) => {
     res.render("contact.ejs");
 });
 
-app.get("/posts", (req, res) => {
+app.post("/posts", (req, res) => {
     res.render("posts.ejs");
 });
 
