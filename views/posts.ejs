@@ -1,0 +1,26 @@
+<%- include("partials/header.ejs") %>
+
+<h2>Blog posts</h2>
+
+<img src="images/books&cup.jpg" alt="Books&Cup.jpg">
+
+<ul>
+    <% if (locals.posts && posts.length) { %>
+
+        <% for (let i=0; i<posts.length; i++) { %>
+      <li>
+        <a href="/<%= posts[i].title.toLowerCase() %>"><%= posts[i].title %></a>
+      </li>
+      <i>Last updated: <%= posts[i].date %></i><br>
+    <% } %>
+  </ul>
+  <% } else { %>
+  <p>No articles to display.</p>
+  <% } %>
+
+  <a href="/create-post">
+    <button >Create a new article</button>
+  </a>
+
+
+<%- include("partials/footer.ejs") %>
