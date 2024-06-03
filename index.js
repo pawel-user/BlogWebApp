@@ -59,10 +59,8 @@ app.post("/create-post", (req, res) => {
     console.log("The file has been saved!");
   });
 
-  res.render(`${path}.ejs`, { article: article });
-  //res.render("posts.ejs", { posts: posts });
-  console.log(posts);
-  console.log(paths);
+  //res.render(`${path}.ejs`, { article: article });
+  res.render("posts.ejs", { posts: posts });
 });
 
 app.get("/create-post", (req, res) => {
