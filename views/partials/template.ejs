@@ -1,7 +1,11 @@
 <%- include("header.ejs") %>
     <% if(article) { %>
-        <h2><%=article.title %></h2>
-        <p><%=article.htmlContent %></p>
+        <h2><%=article["title"] %></h2>
+        <p><%=article["htmlContent"] %></p>
     <% } %>
+
+    <a href="/edit-post">
+        <button>Edit post</button>
+    </a>
 
 <%- include("footer.ejs") %>
