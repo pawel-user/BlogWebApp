@@ -1,6 +1,8 @@
 import express from "express";
 import bodyParser from "body-parser";
 import fs from "fs";
+//import * as readline from 'node:readline/promises';
+//import { stdin as input, stdout as output } from 'node:process';
 
 const app = express();
 const port = 3000;
@@ -8,6 +10,7 @@ const port = 3000;
 var posts = [];
 var position = posts.length;
 var index = 0;
+var success = false;
 
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -69,7 +72,6 @@ app.get("/edit-post", (req, res) => {
 });
 
 app.post("/edit-post", (req, res) => {
-
   var old_endpoint = posts[index].endpoint;
 
   const article = {
@@ -89,7 +91,6 @@ app.post("/edit-post", (req, res) => {
   posts[article.position] = article;
   console.log(posts);
 
-
   fs.writeFile(`./views/${article.endpoint}.ejs`, data, (err) => {
     if (err) throw err;
     console.log(`The new file ${article.endpoint}.ejs has been saved!`);
@@ -105,43 +106,91 @@ app.post("/edit-post", (req, res) => {
   res.render("posts.ejs", { posts: posts, position });
 });
 
+// First solution
+//   app.get("/delete-post", async (req, res) => {
+
+//   const rl = readline.createInterface({
+//     input: process.stdin,
+//     output: process.stdout
+//   });
+  
+//   const answer = await rl.question("Are you sure to delete this post? (y/n) ");
+
+//     if (answer == "y" || answer == "Y" || answer == "yes") {
+//         console.log("Post was deleted sucessfully");
+//         success = true;
+
+//     } else {
+//         console.log("Deleting post was canceled!");
+//         success = false;
+
+//     }
+//     // pause the rl so the program can exit
+//     rl.pause();
+//     res.render("delete-post.ejs", { answer: success });
+
+// });
+  
+// Second solution
+app.get("/delete-post", (req, res) => {
+  
+    //delete posts[index];
+    res.render("delete-post.ejs", {posts, index});
+});
+
+app.post("/delete-post", (req, res) => {
+  
+  delete posts[index];
+  posts = posts.filter(function( element ) {
+    return element !== undefined;
+    });
+
+  for (var i=0; i<posts.length; i++) {
+    posts[i].position = i;
+  }
+
+  position = posts.length;
+
+  console.log(posts);
+
+  res.render("posts.ejs", {posts, index});
+});
+
+
 app.listen(port, () => {
   console.log(`Server running on port ${port}.`);
 });
 
 // A few route examples
 app.get("/postname", (req, res) => {
-
   for (var i = 0; i < posts.length; i++) {
     if (posts[i].endpoint === "postname") {
       index = i;
     }
   }
 
-  console.log(posts[index]);
+  //console.log(posts[index]);
   res.render("postname.ejs", { article: posts[index] });
 });
 
 app.get("/article", (req, res) => {
-
   for (var i = 0; i < posts.length; i++) {
     if (posts[i].endpoint === "article") {
       index = i;
-    };
-  };
+    }
+  }
 
-  console.log(posts[index]);
+  //console.log(posts[index]);
   res.render("article.ejs", { article: posts[index] });
 });
 
 app.get("/example", (req, res) => {
-
   for (var i = 0; i < posts.length; i++) {
     if (posts[i].endpoint === "example") {
       index = i;
-    };
-  };
-  
-  console.log(posts[index]);
+    }
+  }
+
+  //console.log(posts[index]);
   res.render("example.ejs", { article: posts[index] });
 });
