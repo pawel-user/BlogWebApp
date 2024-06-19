@@ -1,13 +1,32 @@
 <%- include("partials/header.ejs") %>
 
-<h2>Editing a post</h2>
+<div class="d-flex flex-column justify-content-center">
+    <h2 class="text-center page-title">Editing a post</h2>
 
-<form action="/edit-post" method="post">
-    <label for="title">Post Title:</label>
-    <input type="text" name="title" value="<%= posts[index].title %>" required>
-    <label for="content">Post Content:</label>
-    <textarea name="content" rows="20" cols="80" required><%= posts[index].htmlContent %></textarea>
-    <input type="submit" value="Edit post">
-</form>
+        <div class="form-box">
+            <form action="/edit-post" method="post">
+                <div class="row">
+                <div class="col-3">
+                    <label class="label-title" for="title">Post Title:</label>
+                </div>
+                <div class="col-9">
+                    <input type="text" class="form-control" name="title" value="<%= posts[index].title %>" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <label class="label-title" for="content">Post Content:</label>
+                </div>
+                <div class="col-9">
+                    <textarea class="form-control" name="content" rows="20" cols="60" required><%= posts[index].htmlContent %></textarea>
+                </div>
+            </div>
+            <div>
+                <input class="btn btn-secondary button-to-edit" type="submit" value="Edit post">
+            </div>
+        </form>
+    </div>
+</div>
+
 
 <%- include("partials/footer.ejs") %>

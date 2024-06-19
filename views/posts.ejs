@@ -1,28 +1,36 @@
 <%- include("partials/header.ejs") %>
 
-<h2>Blog posts</h2>
+  <h2 class="page-title">Blog posts</h2>
 
-<img src="images/books&cup.jpg" alt="Books&Cup.jpg">
+  <div class="container-fluid float-left">
+    <div class="row">
+      <div class="col-xl-4 col-lg-5 col-sm-12 col-xs-12 post-img-box">
+        <img class="posts-img" src="images/books&cup.jpg" alt="Books&Cup.jpg">
+      </div>
+        <div class="col-xl-8 col-lg-7 col-sm-12 col-xs-12">
+          <% if (locals.posts && posts.length) { %>
+            <ul>
+              <% for (let i=posts.length-1; i>=0; i--) { %>
+                <li>
+                  <% path=posts[i].title.replaceAll(' ','').toLowerCase(); %>
+                  <a href="/<%=path%>"><%= posts[i].title %></a><a href="/delete-post"><i class="icon-link3 fa-solid fa-trash"></i></a>
 
-<ul>
-    <% if (locals.posts && posts.length) { %>
-
-        <% for (let i=posts.length-1; i>=0; i--) { %>
-      <li>
-        <% path = posts[i].title.replaceAll(' ','').toLowerCase(); %>
-        <a href="/<%= path %>"><%= posts[i].title %></a>
-      </li>
-      <i>Last updated: <%= posts[i].date %></i><br>
-      <p><%= posts[i].htmlContent %></p><br>
-    <% } %>
-  </ul>
-  <% } else { %>
-  <p>No articles to display.</p>
-  <% } %>
-
-  <a href="/create-post">
-    <button >Create a new article</button>
-  </a>
-
+                </li>
+              <i>Last updated: <%= posts[i].date %></i><br>
+              <p><%= posts[i].htmlContent %></p><br>
+              <% } %>
+            </ul>
+          <% } else { %>
+          <p class="text-center">No posts to display.</p>
+          <% } %>
+  
+            <div class="text-center">
+              <a href="/create-post">
+                <button class="btn btn-dark">Create a new article</button>
+              </a>
+            </div>
+        </div>
+    </div>
+  </div>  
 
 <%- include("partials/footer.ejs") %>

@@ -1,15 +1,17 @@
 <%- include("partials/header.ejs") %>
 
 <div id="confirmation">
-    <h3>Are you sure to delete this post?</h3>
-    <textarea disabled><%=posts[index].htmlContent %></textarea>
-    <p>Click OK or Cancel Button.</p>
-    
-    <div class="">
-        <form action="/delete-post" method="post">
-            <input type="submit" value="OK"></input>
-        </form>
-        <button onclick="cancel()" class="cancel">Cancel</button>
+    <div class="form-box">
+        <h3 class="text-center page-title">Are you sure to delete this post?</h3>
+        <textarea class="form-control" disabled><%=posts[index].htmlContent %></textarea>
+        <p class="hint">Click OK or Cancel Button.</p>
+        
+        <div class="delete-box">
+            <form action="/delete-post" method="post">
+                <input class="btn btn-success" type="submit" value="OK"></input>
+            </form>
+            <button class="btn btn-secondary" onclick="cancel()" class="cancel">Cancel</button>
+        </div>
     </div>
 </div>
 
@@ -19,7 +21,8 @@
 // }
 
 function cancel() {
-  document.getElementById("confirmation").innerHTML = "Deleting post was canceled!";
+   document.getElementById("confirmation").innerHTML = "Deleting post was canceled!";
+   document.getElementById("confirmation").style.color = '#red';
 
 // stop for sometime if needed
 setTimeout(myFunction, 2000);
