@@ -33,7 +33,7 @@ app.get("/contact", (req, res) => {
 });
 
 app.get("/posts", (req, res) => {
-  res.render("posts.ejs", { posts: posts });
+  res.render("posts.ejs", { posts: posts, index });
 });
 
 app.post("/create-post", (req, res) => {
@@ -60,7 +60,13 @@ app.post("/create-post", (req, res) => {
     console.log("The file has been saved!");
   });
 
-  res.render("posts.ejs", { posts: posts, position });
+  for (var i = 0; i < posts.length; i++) {
+    if (posts[i].endpoint === article.endpoint) {
+      index = i;
+    }
+  }
+
+  res.render("posts.ejs", { posts: posts, position, index });
 });
 
 app.get("/create-post", (req, res) => {
@@ -103,7 +109,7 @@ app.post("/edit-post", (req, res) => {
     });
   }
 
-  res.render("posts.ejs", { posts: posts, position });
+  res.render("posts.ejs", { posts: posts, position, index });
 });
 
 // First solution
@@ -133,8 +139,6 @@ app.post("/edit-post", (req, res) => {
   
 // Second solution
 app.get("/delete-post", (req, res) => {
-  
-    //delete posts[index];
     res.render("delete-post.ejs", {posts, index});
 });
 

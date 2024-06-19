@@ -1,18 +1,30 @@
 <%- include("header.ejs") %>
-    <% if(article) { %>
-        <h2>
-            <%=article["title"] %>
-        </h2>
-        <p>
-            <%=article["htmlContent"] %>
-        </p>
-        <% } %>
+    <div class="form-box">
+        <div class="box-frame">
+            <div class="box-content">
+                <% if(article) { %>
+                    <h2 class="text-center page-title">
+                        <%=article["title"] %>
+                    </h2>
+                    <p>Last updated:<i class="tabbed">
+                            <%=article["date"] %>
+                        </i></p>
+                    <p>
+                        <%=article["htmlContent"] %>
+                    </p>
+                    <% } %>
 
-            <a href="/edit-post">
-                <button>Edit post</button>
-            </a>
+                        <div class="danger-box">
+                            <a class="button-link" href="/edit-post">
+                                <button class="btn btn-secondary">Edit post</button>
+                            </a>
+                            <a class="button-link" href="/delete-post">
+                                <button class="btn btn-danger">Delete post</button>
+                            </a>
+                        </div>
 
-            <a href="/delete-post">
-                <button>Delete post</button>
-            </a>
-<%- include("footer.ejs") %>
+            </div>
+
+        </div>
+    </div>
+    <%- include("footer.ejs") %>

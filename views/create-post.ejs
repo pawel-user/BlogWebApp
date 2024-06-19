@@ -1,13 +1,21 @@
 <%- include("partials/header.ejs") %>
 
-<h2>Writing a new post</h2>
+<div class="d-flex flex-column justify-content-center">
 
-<form action="/create-post" method="post">
-    <label for="title">Post Title:</label>
-    <input type="text" name="title" placeholder="Enter Post Title" required>
-    <label for="content">Post Content:</label>
-    <textarea name="content" rows="20" cols="80" placeholder="Write your post" required></textarea>
-    <input type="submit" value="Create post">
+<h2 class="text-center">Writing a new post</h2>
+
+<div class="form-box">
+    <form action="/create-post" method="post">
+    <label class="label-title" for="title">Post Title:</label>
+    <input type="text" class="form-control" name="title" placeholder="Enter Post Title" required>
+    <label class="label-title" for="content">Post Content:</label>
+    <textarea class="form-control" name="content" rows="20" cols="80" placeholder="Write your post" required></textarea>
+    <div class="text-center">
+        <input class="btn btn-secondary button-to-create" type="submit" value="Create post">
+    </div>
 </form>
+</div>
+
+</div>
 
 <%- include("partials/footer.ejs") %>
